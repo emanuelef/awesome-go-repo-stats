@@ -182,9 +182,11 @@ func main() {
 						}
 					}
 
+					/*
 					if i > 10 {
 						break
 					}
+					*/
 
 				}
 
