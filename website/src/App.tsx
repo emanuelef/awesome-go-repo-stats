@@ -42,12 +42,6 @@ const csvURL =
 
 const columns: GridColDef[] = [
   {
-    field: "stars",
-    headerName: "Stars",
-    width: 130,
-    valueGetter: (val) => parseInt(val.row["stars"]),
-  },
-  {
     field: "repo",
     headerName: "Repo",
     width: 200,
@@ -56,6 +50,12 @@ const columns: GridColDef[] = [
         {params.value}
       </Link>
     ),
+  },
+  {
+    field: "stars",
+    headerName: "Stars",
+    width: 130,
+    valueGetter: (val) => parseInt(val.row["stars"]),
   },
   {
     field: "archived",
@@ -135,7 +135,6 @@ function App() {
           },
         }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
       />
     </div>
   );
