@@ -35,6 +35,8 @@ stars
 stars-per-mille-30d
 "26.718"*/
 
+const GitHubURL = "https://github.com/";
+
 const csvURL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv";
 
@@ -45,7 +47,14 @@ const columns: GridColDef[] = [
     width: 130,
     valueGetter: (val) => parseInt(val.row["stars"]),
   },
-  { field: "repo", headerName: "Repo", width: 180 },
+  {
+    field: "repo",
+    headerName: "Repo",
+    width: 180,
+    renderCell: (params) => (
+      <Link href={"GitHubURL" + params.value}>params.value</Link>
+    ),
+  },
   {
     field: "archived",
     headerName: "Archived",
@@ -55,19 +64,19 @@ const columns: GridColDef[] = [
     field: "days-last-commit",
     headerName: "Days last commit",
     width: 130,
-    valueGetter: (val) => parseInt(val.row["days-last-commit"]),
+    valueGetter: (params) => parseInt(params.value),
   },
   {
     field: "new-stars-last-30d",
     headerName: "Stars last 30d",
     width: 110,
-    valueGetter: (val) => parseInt(val.row["new-stars-last-30d"]),
+    valueGetter: (params) => parseInt(params.value),
   },
   {
     field: "new-stars-last-7d",
     headerName: "Stars last 7d",
     width: 110,
-    valueGetter: (val) => parseInt(val.row["new-stars-last-7d"]),
+    valueGetter: (params) => parseInt(params.value),
   },
   {
     field: "stars-per-mille-30d",
