@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Papa from "papaparse";
 import "./App.css";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import Link from "@mui/material/Link";
+
 /*
 archived
 "false"
@@ -32,6 +34,9 @@ stars
 "262"
 stars-per-mille-30d
 "26.718"*/
+
+const csvURL =
+  "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv";
 
 const columns: GridColDef[] = [
   {
@@ -82,9 +87,7 @@ const columns: GridColDef[] = [
 
 function App() {
   const fetchPositions = () => {
-    fetch(
-      "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv"
-    )
+    fetch(csvURL)
       .then((response) => response.text())
       .then((text) => Papa.parse(text, { header: true }))
       .then(function (result) {
@@ -104,6 +107,9 @@ function App() {
 
   return (
     <div style={{ height: 800, width: 1280, backgroundColor: "azure" }}>
+      <Link href={csvURL} download>
+        Link
+      </Link>
       <DataGrid
         getRowId={(row) => row.repo}
         rows={dataRows}
