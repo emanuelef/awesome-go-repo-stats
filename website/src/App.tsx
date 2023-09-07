@@ -113,6 +113,9 @@ function App() {
           pagination: {
             paginationModel: { page: 0, pageSize: 50 },
           },
+          sorting: {
+            sortModel: [{ field: "stars-per-mille-30d", sort: "desc" }],
+          },
         }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
