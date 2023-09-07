@@ -34,24 +34,47 @@ stars-per-mille-30d
 "26.718"*/
 
 const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
   {
     field: "stars",
     headerName: "Stars",
     width: 130,
     valueGetter: (val) => parseInt(val.row["stars"]),
   },
-  { field: "repo", headerName: "Repo", width: 130 },
+  { field: "repo", headerName: "Repo", width: 180 },
   {
     field: "archived",
     headerName: "Archived",
-    width: 130,
+    width: 110,
   },
   {
     field: "days-last-commit",
     headerName: "Days last commit",
     width: 130,
     valueGetter: (val) => parseInt(val.row["days-last-commit"]),
+  },
+  {
+    field: "new-stars-last-30d",
+    headerName: "Stars last 30d",
+    width: 110,
+    valueGetter: (val) => parseInt(val.row["new-stars-last-30d"]),
+  },
+  {
+    field: "new-stars-last-7d",
+    headerName: "Stars last 7d",
+    width: 110,
+    valueGetter: (val) => parseInt(val.row["new-stars-last-7d"]),
+  },
+  {
+    field: "stars-per-mille-30d",
+    headerName: "Stars /1000",
+    width: 110,
+    valueGetter: (val) => parseFloat(val.row["stars-per-mille-30d"]),
+  },
+  {
+    field: "dependencies",
+    headerName: "Direct dependencies",
+    width: 160,
+    valueGetter: (val) => parseInt(val.row["dependencies"]),
   },
 ];
 
@@ -80,14 +103,15 @@ function App() {
   }, []);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 800, width: 1280, backgroundColor: "azure" }}>
       <DataGrid
         getRowId={(row) => row.repo}
         rows={dataRows}
         columns={columns}
+        rowHeight={30}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 50 },
           },
         }}
         pageSizeOptions={[5, 10]}
