@@ -50,7 +50,7 @@ const columns: GridColDef[] = [
   {
     field: "repo",
     headerName: "Repo",
-    width: 180,
+    width: 200,
     renderCell: (params) => (
       <Link href={GitHubURL + params.value} target="_blank">
         {params.value}
