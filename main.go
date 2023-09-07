@@ -14,7 +14,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/emanuelef/cncf-repos-stats/otel_instrumentation"
 	"github.com/emanuelef/github-repo-activity-stats/repostats"
 	"github.com/go-resty/resty/v2"
 	_ "github.com/joho/godotenv/autoload"
