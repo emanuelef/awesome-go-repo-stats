@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+// @ts-ignore
 import Papa from "papaparse";
 import "./App.css";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 /*
 archived
 "false"
