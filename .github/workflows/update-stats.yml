@@ -26,6 +26,9 @@ jobs:
         run: go run main.go
         env:
           PAT: ${{ secrets.PAT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+          OTEL_SERVICE_NAME: ${{ vars.OTEL_SERVICE_NAME }}
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
           FILE_SUFFIX: "latest"
 
       - name: Push generated csv files to the repo
