@@ -117,7 +117,7 @@ function App() {
   }, []);
 
   return (
-    <div style={{ height: 800, width: 1280, backgroundColor: "azure" }}>
+    <div style={{ height: 800, width: 1440, backgroundColor: "azure" }}>
       <Link href={csvURL} download>
         Link
       </Link>
