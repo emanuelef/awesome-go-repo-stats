@@ -58,11 +58,6 @@ const columns: GridColDef[] = [
     valueGetter: (val) => parseInt(val.row["stars"]),
   },
   {
-    field: "archived",
-    headerName: "Archived",
-    width: 110,
-  },
-  {
     field: "days-last-commit",
     headerName: "Days last commit",
     width: 130,
@@ -82,15 +77,20 @@ const columns: GridColDef[] = [
   },
   {
     field: "stars-per-mille-30d",
-    headerName: "Stars /1000",
-    width: 110,
+    headerName: "New Stars 30d ‰",
+    width: 130,
     valueGetter: (val) => parseFloat(val.row["stars-per-mille-30d"]),
   },
   {
     field: "dependencies",
-    headerName: "Direct dependencies",
-    width: 160,
+    headerName: "Direct deps",
+    width: 130,
     valueGetter: (val) => parseInt(val.row["dependencies"]),
+  },
+  {
+    field: "archived",
+    headerName: "Archived",
+    width: 110,
   },
 ];
 
