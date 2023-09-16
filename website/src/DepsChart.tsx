@@ -4,7 +4,7 @@ import Papa from "papaparse";
 import "./App.css";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-const GitHubURL = "https://github.com/";
+const GitHubURL = "https://";
 
 const csvURL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/dep-repo-latest.csv";
