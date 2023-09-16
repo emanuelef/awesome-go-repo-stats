@@ -3,7 +3,15 @@ import { useState, useEffect } from "react";
 import Papa from "papaparse";
 import "./App.css";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import Link from "@mui/material/Link";
+import Linkweb from "@mui/material/Link";
+
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Routes, Route, Link } from "react-router-dom";
+
+import DepsChart from "./DepsChart";
+
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import TableViewRounded from "@mui/icons-material/TableViewRounded";
 
 /*
 archived
@@ -44,11 +52,11 @@ const columns: GridColDef[] = [
   {
     field: "repo",
     headerName: "Repo",
-    width: 200,
+    width: 220,
     renderCell: (params) => (
-      <Link href={GitHubURL + params.value} target="_blank">
+      <Linkweb href={GitHubURL + params.value} target="_blank">
         {params.value}
-      </Link>
+      </Linkweb>
     ),
   },
   {
@@ -61,6 +69,12 @@ const columns: GridColDef[] = [
     field: "days-last-commit",
     headerName: "Days last commit",
     width: 130,
+    valueGetter: (params) => parseInt(params.value),
+  },
+  {
+    field: "days-last-star",
+    headerName: "Days last star",
+    width: 110,
     valueGetter: (params) => parseInt(params.value),
   },
   {
@@ -82,10 +96,16 @@ const columns: GridColDef[] = [
     valueGetter: (val) => parseFloat(val.row["stars-per-mille-30d"]),
   },
   {
+    field: "mentionable-users",
+    headerName: "Ment. users",
+    width: 110,
+    valueGetter: (params) => parseInt(params.value),
+  },
+  {
     field: "dependencies",
     headerName: "Direct deps",
     width: 130,
-    valueGetter: (val) => parseInt(val.row["dependencies"]),
+    valueGetter: (params) => parseInt(params.value),
   },
   {
     field: "archived",
@@ -111,31 +131,75 @@ function App() {
   };
 
   const [dataRows, setDataRows] = useState([]);
+  const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
     fetchPositions();
   }, []);
 
+  const Table = () => {
+    return (
+      <>
+        <Linkweb href={csvURL} download>
+          Link
+        </Linkweb>
+        <DataGrid
+          getRowId={(row) => row.repo}
+          rows={dataRows}
+          columns={columns}
+          rowHeight={30}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 25 },
+            },
+            sorting: {
+              sortModel: [{ field: "stars-per-mille-30d", sort: "desc" }],
+            },
+          }}
+          pageSizeOptions={[5, 10]}
+        />
+      </>
+    );
+  };
+
   return (
-    <div style={{ height: 800, width: 1440, backgroundColor: "azure" }}>
-      <Link href={csvURL} download>
-        Link
-      </Link>
-      <DataGrid
-        getRowId={(row) => row.repo}
-        rows={dataRows}
-        columns={columns}
-        rowHeight={30}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 50 },
-          },
-          sorting: {
-            sortModel: [{ field: "stars-per-mille-30d", sort: "desc" }],
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-      />
+    <div style={{ display: "flex", height: "100vh" }}>
+      <Sidebar className="app" collapsed={collapsed}>
+        <Menu>
+          <MenuItem
+            component={<Link to="/" className="link" />}
+            className="menu1"
+            icon={
+              <MenuRoundedIcon
+                onClick={() => {
+                  setCollapsed(!collapsed);
+                }}
+              />
+            }
+          >
+            <h2>Awesome Go Stats</h2>
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/table" className="link" />}
+            icon={<TableViewRounded />}
+          >
+            Table
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/deps" className="link" />}
+            icon={<TableViewRounded />}
+          >
+            Dependencies
+          </MenuItem>
+        </Menu>
+      </Sidebar>
+      <section>
+        <Routes>
+          <Route path="/" element={<Table />} />
+          <Route path="/table" element={<Table />} />
+          <Route path="/deps" element={<DepsChart />} />
+        </Routes>
+      </section>
     </div>
   );
 }

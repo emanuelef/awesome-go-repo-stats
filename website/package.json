@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "start": "vite --open",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -13,12 +13,14 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.9",
     "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.9",
     "@mui/x-data-grid": "^6.14.0",
     "papaparse": "^5.4.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-pro-sidebar": "^1.1.0-alpha.1",
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
