@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-import "./App.css";
 import { ResponsiveWaffle } from "@nivo/waffle";
+import "./App.css";
 
-let dataSample = [
+const initialDataSample = [
   {
     id: "satisified",
     label: "Ok",
@@ -17,32 +17,22 @@ let dataSample = [
 ];
 
 function WaffleChart({ dataRows }) {
-  const [data, setData] = useState([]);
-  const [minDaysLastCommit, setMinDaysLastCommit] = useState("0");
-  const [minStars, setMinStars] = useState("0");
+  const [minDaysLastCommit, setMinDaysLastCommit] = useState("30");
+  const [minStars, setMinStars] = useState("10");
+  const [minMentionableUsers, setMinMentionableUsers] = useState("10");
+  const [data, setData] = useState(initialDataSample);
 
-  const handleLastCommitInputChange = (event) => {
+  const handleInputChange = (event, setStateFunction) => {
     const inputText = event.target.value;
 
     // Use a regular expression to check if the input contains only digits
     if (/^\d*$/.test(inputText)) {
-      setMinDaysLastCommit(inputText);
-    }
-  };
-
-  const handleMinStarsInputChange = (event) => {
-    const inputText = event.target.value;
-
-    // Use a regular expression to check if the input contains only digits
-    if (/^\d*$/.test(inputText)) {
-      setMinStars(inputText);
+      setStateFunction(inputText);
     }
   };
 
   const loadData = () => {
-    console.log(dataRows);
-
-    dataSample = [
+    const updatedDataSample = [
       {
         id: "unsatisfied",
         label: "Non ok",
@@ -54,26 +44,24 @@ function WaffleChart({ dataRows }) {
         value: 0,
       },
     ];
-
     dataRows.forEach((element) => {
       if (
-        //element.archived === "true" &&
-        parseInt(element["days-last-commit"]) > parseInt(minDaysLastCommit)
+        parseInt(element["days-last-commit"]) > parseInt(minDaysLastCommit) ||
+        parseInt(element["stars"]) < parseInt(minStars) ||
+        parseInt(element["mentionable-users"]) < parseInt(minMentionableUsers)
       ) {
-        dataSample[0].value++;
+        updatedDataSample[0].value++;
       } else {
-        dataSample[1].value++;
+        updatedDataSample[1].value++;
       }
     });
-
-    console.log(dataSample);
-
-    setData(dataSample);
+    console.log(updatedDataSample);
+    setData(updatedDataSample);
   };
 
   useEffect(() => {
     loadData();
-  }, [minDaysLastCommit, minStars]);
+  }, [minDaysLastCommit, minStars, minMentionableUsers]);
 
   return (
     <div style={{ height: 780, width: 1040, backgroundColor: "azure" }}>
@@ -82,11 +70,11 @@ function WaffleChart({ dataRows }) {
         label="Min days since last commit"
         variant="outlined"
         value={minDaysLastCommit}
-        onChange={handleLastCommitInputChange}
+        onChange={(e) => handleInputChange(e, setMinDaysLastCommit)}
         InputProps={{
           inputProps: {
-            pattern: "[0-9]*", // Use pattern attribute to restrict input to digits
-            inputMode: "numeric", // Use inputMode attribute for better mobile support
+            pattern: "[0-9]*",
+            inputMode: "numeric",
           },
         }}
       />
@@ -95,11 +83,24 @@ function WaffleChart({ dataRows }) {
         label="Min stars"
         variant="outlined"
         value={minStars}
-        onChange={handleMinStarsInputChange}
+        onChange={(e) => handleInputChange(e, setMinStars)}
         InputProps={{
           inputProps: {
-            pattern: "[0-9]*", // Use pattern attribute to restrict input to digits
-            inputMode: "numeric", // Use inputMode attribute for better mobile support
+            pattern: "[0-9]*",
+            inputMode: "numeric",
+          },
+        }}
+      />
+      <TextField
+        style={{ marginTop: "20px" }}
+        label="Min men. users"
+        variant="outlined"
+        value={minMentionableUsers}
+        onChange={(e) => handleInputChange(e, setMinMentionableUsers)}
+        InputProps={{
+          inputProps: {
+            pattern: "[0-9]*",
+            inputMode: "numeric",
           },
         }}
       />
