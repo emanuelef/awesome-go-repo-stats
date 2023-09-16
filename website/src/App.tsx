@@ -8,7 +8,7 @@ import Linkweb from "@mui/material/Link";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Routes, Route, Link } from "react-router-dom";
 
-import LangBarChart from "./LangBarChart";
+import WaffleChart from "./WaffleChart";
 import DepsChart from "./DepsChart";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
@@ -206,7 +206,7 @@ function App() {
           <Route path="/" element={<Table />} />
           <Route path="/table" element={<Table />} />
           <Route path="/deps" element={<DepsChart />} />
-          <Route path="/lang" element={<LangBarChart dataRows={dataRows} />} />
+          <Route path="/lang" element={<WaffleChart dataRows={dataRows} />} />
         </Routes>
       </section>
     </div>
