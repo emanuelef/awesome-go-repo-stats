@@ -66,7 +66,7 @@ function WaffleChart({ dataRows }) {
   return (
     <div style={{ height: 780, width: 1040, backgroundColor: "azure" }}>
       <TextField
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: "20px", marginRight: "20px", marginLeft: "20px" }}
         label="Min days since last commit"
         variant="outlined"
         value={minDaysLastCommit}
@@ -79,7 +79,7 @@ function WaffleChart({ dataRows }) {
         }}
       />
       <TextField
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: "20px", marginRight: "20px" }}
         label="Min stars"
         variant="outlined"
         value={minStars}

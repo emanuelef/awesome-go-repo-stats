@@ -4,16 +4,20 @@ import Papa from "papaparse";
 import "./App.css";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Linkweb from "@mui/material/Link";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Routes, Route, Link } from "react-router-dom";
 
+import TimeSeriesChart from "./TimeSeriesChart";
 import WaffleChart from "./WaffleChart";
 import DepsChart from "./DepsChart";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import TableViewRounded from "@mui/icons-material/TableViewRounded";
 import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
+import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
 
 /*
 archived
@@ -133,6 +137,7 @@ function App() {
   };
 
   const [dataRows, setDataRows] = useState([]);
+  const [selectedRepo, setSelectedRepo] = useState("kubernetes/kubernetes");
   const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
@@ -160,6 +165,27 @@ function App() {
           }}
           pageSizeOptions={[5, 10]}
         />
+      </>
+    );
+  };
+
+  const StarsTimeline = () => {
+    return (
+      <>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={dataRows.map((el) => {
+            return { label: el.repo };
+          })}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Repo" />}
+          onChange={(e, v) => {
+            console.log(v?.label);
+            setSelectedRepo(v?.label);
+          }}
+        />
+        <TimeSeriesChart repo={selectedRepo} />
       </>
     );
   };
@@ -194,10 +220,16 @@ function App() {
             Dependencies
           </MenuItem>
           <MenuItem
-            component={<Link to="/lang" className="link" />}
+            component={<Link to="/waffle" className="link" />}
             icon={<BarChartRoundedIcon />}
           >
-            Languages
+            Waffle
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/starstimeline" className="link" />}
+            icon={<TimelineRoundedIcon />}
+          >
+            StarsTimeline
           </MenuItem>
         </Menu>
       </Sidebar>
@@ -206,7 +238,8 @@ function App() {
           <Route path="/" element={<Table />} />
           <Route path="/table" element={<Table />} />
           <Route path="/deps" element={<DepsChart />} />
-          <Route path="/lang" element={<WaffleChart dataRows={dataRows} />} />
+          <Route path="/waffle" element={<WaffleChart dataRows={dataRows} />} />
+          <Route path="/starstimeline" element={<StarsTimeline />} />
         </Routes>
       </section>
     </div>
