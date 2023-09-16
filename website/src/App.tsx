@@ -8,10 +8,12 @@ import Linkweb from "@mui/material/Link";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Routes, Route, Link } from "react-router-dom";
 
+import LangBarChart from "./LangBarChart";
 import DepsChart from "./DepsChart";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import TableViewRounded from "@mui/icons-material/TableViewRounded";
+import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 
 /*
 archived
@@ -191,6 +193,12 @@ function App() {
           >
             Dependencies
           </MenuItem>
+          <MenuItem
+            component={<Link to="/lang" className="link" />}
+            icon={<BarChartRoundedIcon />}
+          >
+            Languages
+          </MenuItem>
         </Menu>
       </Sidebar>
       <section>
@@ -198,6 +206,7 @@ function App() {
           <Route path="/" element={<Table />} />
           <Route path="/table" element={<Table />} />
           <Route path="/deps" element={<DepsChart />} />
+          <Route path="/lang" element={<LangBarChart dataRows={dataRows} />} />
         </Routes>
       </section>
     </div>
