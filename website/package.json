@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.15",
-    "@mui/x-data-grid": "^6.16.3",
+    "@mui/x-data-grid": "^6.17.0",
     "@nivo/bar": "^0.83.0",
     "@nivo/waffle": "^0.83.0",
     "@uiw/react-github-corners": "^1.5.16",
