@@ -2,6 +2,8 @@ module github.com/emanuelef/awesome-go-repo-stats
 
 go 1.21
 
+toolchain go1.21.3
+
 require (
 	github.com/emanuelef/github-repo-activity-stats v0.0.4
 	github.com/go-resty/resty/v2 v2.10.0
