@@ -31,11 +31,18 @@ jobs:
           OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
           FILE_SUFFIX: "latest"
 
-      - name: Push generated csv files to the repo
+      - name: Set last update date
+        run: |
+          current_day=$(date +"%Y-%m-%d")
+          echo "${current_day}" > "last-update.txt"
+
+      - name: Push generated files to the repo
         uses: stefanzweifel/git-auto-commit-action@v4
 
-      - name: Archive csv results
+      - name: Upload results
         uses: actions/upload-artifact@v3
         with:
           name: generated-stats-csv
-          path: ./*.csv
+          path: |
+            ./*.csv
+            ./last-update.txt
