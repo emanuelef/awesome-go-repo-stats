@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.16",
-    "@mui/x-data-grid": "^6.17.0",
+    "@mui/x-data-grid": "^6.18.0",
     "@nivo/bar": "^0.83.0",
     "@nivo/waffle": "^0.83.0",
     "@uiw/react-github-corners": "^1.5.16",
@@ -28,11 +28,11 @@
     "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.33",
+    "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
-    "@vitejs/plugin-react": "^4.1.0",
+    "@vitejs/plugin-react": "^4.1.1",
     "eslint": "^8.52.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
