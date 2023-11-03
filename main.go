@@ -54,14 +54,21 @@ func writeGoDepsMapFile(deps map[string]int) {
 		"dep", "awesome_go_repos_using_dep",
 	}
 
-	csvWriter.Write(headerRow)
+	err = csvWriter.Write(headerRow)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	for k, v := range deps {
 		if v > 20 {
-			csvWriter.Write([]string{
+			err = csvWriter.Write([]string{
 				k,
 				fmt.Sprintf("%d", v),
 			})
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}
 }
@@ -115,7 +122,11 @@ func main() {
 		"archived", "dependencies",
 	}
 
-	csvWriter.Write(headerRow)
+	err = csvWriter.Write(headerRow)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	depsUse := map[string]int{}
 
@@ -166,7 +177,7 @@ func main() {
 					daysSinceLastStar := int(currentTime.Sub(result.LastStarDate).Hours() / 24)
 					daysSinceLastCommit := int(currentTime.Sub(result.LastCommitDate).Hours() / 24)
 					daysSinceCreation := int(currentTime.Sub(result.CreatedAt).Hours() / 24)
-					csvWriter.Write([]string{
+					err = csvWriter.Write([]string{
 						repo,
 						fmt.Sprintf("%d", result.Stars),
 						fmt.Sprintf("%d", result.AddedLast30d),
@@ -182,6 +193,10 @@ func main() {
 						fmt.Sprintf("%t", result.Archived),
 						fmt.Sprintf("%d", len(result.DirectDeps)),
 					})
+
+					if err != nil {
+						log.Fatal(err)
+					}
 
 					if len(result.DirectDeps) > 0 {
 						for _, dep := range result.DirectDeps {
