@@ -68,7 +68,7 @@ const columns: GridColDef[] = [
   {
     field: "stars",
     headerName: "Stars",
-    width: 110,
+    width: 100,
     valueGetter: (val) => parseInt(val.row["stars"]),
   },
   {
