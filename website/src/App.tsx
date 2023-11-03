@@ -19,6 +19,9 @@ import TableViewRounded from "@mui/icons-material/TableViewRounded";
 import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
 
+// Import the Header component
+import Header from "./Header";
+
 /*
 archived
 "false"
@@ -53,6 +56,9 @@ const GitHubURL = "https://github.com/";
 
 const csvURL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv";
+
+const lastUpdateURL =
+  "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/last-update.txt";
 
 const columns: GridColDef[] = [
   {
@@ -123,7 +129,7 @@ const columns: GridColDef[] = [
 // https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv
 
 function App() {
-  const fetchPositions = () => {
+  const fetchReposData = () => {
     fetch(csvURL)
       .then((response) => response.text())
       .then((text) => Papa.parse(text, { header: true, skipEmptyLines: true }))
@@ -136,20 +142,37 @@ function App() {
       });
   };
 
+  const fetchLastUpdate = () => {
+    fetch(lastUpdateURL)
+      .then((response) => response.text())
+      .then(function (dateString) {
+        console.log(dateString);
+        const date = new Date(dateString);
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+          date
+        );
+
+        setLastUpdate(formattedDate);
+      })
+      .catch((e) => {
+        console.error(`An error occurred: ${e}`);
+      });
+  };
+
   const [dataRows, setDataRows] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState("kubernetes/kubernetes");
   const [collapsed, setCollapsed] = useState(true);
+  const [lastUpdate, setLastUpdate] = useState("Unknown");
 
   useEffect(() => {
-    fetchPositions();
+    fetchReposData();
+    fetchLastUpdate();
   }, []);
 
   const Table = () => {
     return (
       <>
-        <Linkweb href={csvURL} download>
-          Link
-        </Linkweb>
         <DataGrid
           getRowId={(row) => row.repo}
           rows={dataRows}
@@ -234,6 +257,7 @@ function App() {
         </Menu>
       </Sidebar>
       <section>
+        <Header lastUpdate={lastUpdate} />
         <Routes>
           <Route path="/" element={<Table />} />
           <Route path="/table" element={<Table />} />

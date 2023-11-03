@@ -50,7 +50,6 @@ function DepsChart() {
 
   return (
     <div>
-      {" "}
       <DataGrid
         getRowId={(row) => row.dep}
         rows={dataRows}
