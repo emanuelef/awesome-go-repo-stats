@@ -17,8 +17,11 @@ import DepsChart from "./DepsChart";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import TableViewRounded from "@mui/icons-material/TableViewRounded";
+import ViewListRoundedIcon from "@mui/icons-material/ViewListRounded";
 import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
+import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded";
+import ViewModuleRoundedIcon from "@mui/icons-material/ViewModuleRounded";
 
 // Import the Header component
 import Header from "./Header";
@@ -422,19 +425,19 @@ function App() {
           </MenuItem>
           <MenuItem
             component={<Link to="/table" className="link" />}
-            icon={<TableViewRounded />}
+            icon={<ViewListRoundedIcon />}
           >
             Table
           </MenuItem>
           <MenuItem
             component={<Link to="/deps" className="link" />}
-            icon={<TableViewRounded />}
+            icon={<LibraryBooksRoundedIcon />}
           >
             Dependencies
           </MenuItem>
           <MenuItem
             component={<Link to="/waffle" className="link" />}
-            icon={<BarChartRoundedIcon />}
+            icon={<ViewModuleRoundedIcon />}
           >
             Waffle
           </MenuItem>
