@@ -66,6 +66,8 @@ function TimeSeriesChart({ repo }) {
   const [ds, setds] = useState(chart_props);
   const loadData = async () => {
     try {
+      console.log("loadData " + repo);
+
       const response = await fetch(API_URL);
       const data = await response.json();
       const dataRepo = data[repo];

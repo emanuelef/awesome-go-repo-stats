@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 // @ts-ignore
 import Papa from "papaparse";
 import "./App.css";
@@ -189,10 +190,12 @@ function App() {
   const [subCategory, setSubCategory] = useState("All");
   const [subCategories, setSubCategories] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchReposData();
     fetchLastUpdate();
-  }, [selectedRepo]);
+  }, []);
 
   useEffect(() => {
     const subCategories = [
@@ -325,6 +328,13 @@ function App() {
   };
 
   const StarsTimeline = () => {
+    const { user, repository } = useParams();
+
+    useEffect(() => {
+      console.log(user + "/" + repository);
+      setSelectedRepo(user + "/" + repository);
+    }, []);
+
     return (
       <>
         <div
@@ -354,6 +364,21 @@ function App() {
             onChange={(e, v) => {
               console.log(v?.label);
               setSelectedRepo(v?.label);
+              navigate(`/starstimeline/${v?.label}`, {
+                replace: false,
+              });
+            }}
+            onBlur={() => {
+              navigate(`/starstimeline/kubernetes/kubernetes}`, {
+                replace: false,
+              });
+            }}
+            clearOnBlur={false}
+            clearOnEscape
+            onClear={() => {
+              navigate(`/starstimeline/kubernetes/kubernetes}`, {
+                replace: false,
+              });
             }}
           />
           <Linkweb
@@ -405,7 +430,9 @@ function App() {
             Waffle
           </MenuItem>
           <MenuItem
-            component={<Link to="/starstimeline" className="link" />}
+            component={
+              <Link to="/starstimeline/:user/:repository" className="link" />
+            }
             icon={<TimelineRoundedIcon />}
           >
             StarsTimeline
@@ -419,7 +446,10 @@ function App() {
           <Route path="/table" element={<Table />} />
           <Route path="/deps" element={<DepsChart />} />
           <Route path="/waffle" element={<WaffleChart dataRows={dataRows} />} />
-          <Route path="/starstimeline" element={<StarsTimeline />} />
+          <Route
+            path="/starstimeline/:user/:repository"
+            element={<StarsTimeline />}
+          />
         </Routes>
       </section>
     </div>
