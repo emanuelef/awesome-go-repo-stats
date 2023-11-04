@@ -60,6 +60,9 @@ const csvURL =
 const lastUpdateURL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/last-update.txt";
 
+const fullStarsHistoryURL =
+  "https://emanuelef.github.io/gh-repo-stats-server/#/";
+
 const columns: GridColDef[] = [
   {
     field: "repo",
@@ -179,7 +182,7 @@ function App() {
   useEffect(() => {
     fetchReposData();
     fetchLastUpdate();
-  }, []);
+  }, [selectedRepo]);
 
   const Table = () => {
     return (
@@ -206,19 +209,42 @@ function App() {
   const StarsTimeline = () => {
     return (
       <>
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={dataRows.map((el) => {
-            return { label: el.repo };
-          })}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Repo" />}
-          onChange={(e, v) => {
-            console.log(v?.label);
-            setSelectedRepo(v?.label);
-          }}
-        />
+        <div
+          style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
+        >
+          <Autocomplete
+            disablePortal
+            id="combo-box-repos"
+            size="small"
+            options={dataRows.map((el) => {
+              return { label: el.repo };
+            })}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                style={{
+                  marginRight: "20px",
+                  marginLeft: "10px",
+                  width: "400px",
+                }}
+                label="Enter a GitHub repository"
+                variant="outlined"
+                size="small"
+              />
+            )}
+            onChange={(e, v) => {
+              console.log(v?.label);
+              setSelectedRepo(v?.label);
+            }}
+          />
+          <Linkweb
+            style={{ marginLeft: "10px" }}
+            href={fullStarsHistoryURL + selectedRepo}
+            target="_blank"
+          >
+            Full Stars History
+          </Linkweb>
+        </div>
         <TimeSeriesChart repo={selectedRepo} />
       </>
     );

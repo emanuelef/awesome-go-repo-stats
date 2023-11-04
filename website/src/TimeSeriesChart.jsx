@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import FusionCharts from "fusioncharts";
 import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import ReactFC from "react-fusioncharts";
@@ -33,6 +33,7 @@ const chart_props = {
     },
   },
 };
+
 const API_URL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/stars-history-30d.json";
 
