@@ -145,6 +145,7 @@ function App() {
       .then(function (result) {
         console.log(result);
         setDataRows(result.data);
+        setFilteredDataRows(result.data);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
@@ -175,6 +176,7 @@ function App() {
   };
 
   const [dataRows, setDataRows] = useState([]);
+  const [filteredDataRows, setFilteredDataRows] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState("kubernetes/kubernetes");
   const [collapsed, setCollapsed] = useState(true);
   const [lastUpdate, setLastUpdate] = useState("Unknown");
@@ -188,7 +190,6 @@ function App() {
   }, [selectedRepo]);
 
   useEffect(() => {
-    console.log(mainCategory);
     const subCategories = [
       ...new Set(
         dataRows
@@ -197,7 +198,27 @@ function App() {
       ),
     ];
     setSubCategories(subCategories);
+
+    if (mainCategory === "All") {
+      setFilteredDataRows(dataRows);
+    } else {
+      setFilteredDataRows(
+        dataRows.filter((el) => el["main-category"] === mainCategory)
+      );
+    }
   }, [mainCategory]);
+
+  useEffect(() => {
+    if (subCategory === "All") {
+      setFilteredDataRows(
+        dataRows.filter((el) => el["main-category"] === mainCategory)
+      );
+    } else {
+      setFilteredDataRows(
+        dataRows.filter((el) => el["sub-category"] === subCategory)
+      );
+    }
+  }, [subCategory]);
 
   const Table = () => {
     return (
@@ -234,6 +255,14 @@ function App() {
                 setMainCategory(v);
               }
             }}
+            onBlur={() => {
+              setMainCategory("All");
+            }}
+            clearOnBlur={false}
+            clearOnEscape
+            onClear={() => {
+              setMainCategory("All");
+            }}
           />
           <Autocomplete
             disablePortal
@@ -259,12 +288,20 @@ function App() {
                 setSubCategory(v);
               }
             }}
+            onBlur={() => {
+              setSubCategory("All");
+            }}
+            clearOnBlur={false}
+            clearOnEscape
+            onClear={() => {
+              setSubCategory("All");
+            }}
           />
         </div>
         <div style={{ marginLeft: "10px" }}>
           <DataGrid
             getRowId={(row) => row.repo}
-            rows={dataRows}
+            rows={filteredDataRows}
             columns={columns}
             rowHeight={30}
             initialState={{
