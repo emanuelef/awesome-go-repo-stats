@@ -147,13 +147,18 @@ function App() {
       .then((response) => response.text())
       .then(function (dateString) {
         console.log(dateString);
-        const date = new Date(dateString);
-        const options = { year: "numeric", month: "long", day: "numeric" };
-        const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
-          date
-        );
-
-        setLastUpdate(formattedDate);
+        const parts = dateString.split("-");
+        if (parts.length === 3) {
+          const year = parseInt(parts[0]);
+          const month = parseInt(parts[1]) - 1; // Months are 0-indexed
+          const day = parseInt(parts[2]);
+          const options = { year: "numeric", month: "long", day: "numeric" };
+          const formattedDate = new Date(year, month, day).toLocaleDateString(
+            "en-US",
+            options
+          );
+          setLastUpdate(formattedDate);
+        }
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
