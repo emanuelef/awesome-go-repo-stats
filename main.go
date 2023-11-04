@@ -120,6 +120,7 @@ func main() {
 		"days-since-creation", "mentionable-users",
 		"language",
 		"archived", "dependencies",
+		"main-category", "sub-category",
 	}
 
 	err = csvWriter.Write(headerRow)
@@ -158,11 +159,20 @@ func main() {
 		// - [resty](https://github.com/go-resty/resty) - Simple HTTP and REST client for Go inspired by Ruby rest-client.
 		exp := regexp.MustCompile(`- \[(.+?)\]\(https:\/\/github.com\/(.+?)\) - .*`)
 
+		mainCategory := "General"
+		subCategory := ""
+
 		for scanner.Scan() {
 			line := scanner.Text()
 
 			if strings.HasPrefix(line, "## ") {
 				fmt.Println(line)
+				mainCategory = strings.TrimPrefix(line, "## ")
+			}
+
+			if strings.HasPrefix(line, "### ") {
+				fmt.Println(line)
+				subCategory = strings.TrimPrefix(line, "### ")
 			}
 
 			subMatch := exp.FindStringSubmatch(line)
@@ -192,6 +202,8 @@ func main() {
 						result.Language,
 						fmt.Sprintf("%t", result.Archived),
 						fmt.Sprintf("%d", len(result.DirectDeps)),
+						fmt.Sprintf(mainCategory),
+						fmt.Sprintf(subCategory),
 					})
 
 					if err != nil {
@@ -208,7 +220,7 @@ func main() {
 
 					// wait to avoid hitting 5k rate limit
 					if i%100 == 0 {
-						time.Sleep(3 * time.Minute)
+						time.Sleep(0 * time.Minute)
 					}
 
 				}
