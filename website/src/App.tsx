@@ -74,7 +74,7 @@ const columns: GridColDef[] = [
   {
     field: "stars",
     headerName: "Stars",
-    width: 100,
+    width: 90,
     valueGetter: (val) => parseInt(val.row["stars"]),
   },
   {
@@ -116,6 +116,12 @@ const columns: GridColDef[] = [
   {
     field: "dependencies",
     headerName: "Direct deps",
+    width: 100,
+    valueGetter: (params) => parseInt(params.value),
+  },
+  {
+    field: "days-since-creation",
+    headerName: "Created days ago",
     width: 130,
     valueGetter: (params) => parseInt(params.value),
   },
