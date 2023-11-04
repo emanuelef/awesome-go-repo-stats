@@ -12,7 +12,7 @@ const chart_props = {
     height: "800",
     dataEmptyMessage: "Fetching data...",
     dataSource: {
-      caption: { text: "New stars per day" },
+      caption: { text: "Daily Stars" },
       data: null,
       yAxis: [
         {
@@ -23,6 +23,13 @@ const chart_props = {
           ],
         },
       ],
+      chart: {
+        animation: "0",
+        theme: "candy",
+        exportEnabled: "1",
+        exportMode: "client",
+        exportFormats: "PNG=Export as PNG|PDF=Export as PDF",
+      },
     },
   },
 };
@@ -80,6 +87,11 @@ function TimeSeriesChart({ repo }) {
       );
       const options = { ...ds };
       options.timeseriesDs.dataSource.data = fusionTable;
+      options.timeseriesDs.dataSource.caption = { text: `Daily Stars ${repo}` };
+      options.timeseriesDs.dataSource.chart.exportFileName = `${repo.replace(
+        "/",
+        "_"
+      )}-stars-history`;
       setds(options);
     } catch (err) {
       console.log(err);
