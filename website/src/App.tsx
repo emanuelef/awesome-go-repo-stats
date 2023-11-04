@@ -132,6 +132,11 @@ const columns: GridColDef[] = [
     field: "archived",
     headerName: "Archived",
     width: 110,
+    renderCell: (params) => (
+      <span style={{ color: params.value === "true" ? "red" : "inherit" }}>
+        {params.value}
+      </span>
+    ),
   },
 ];
 
