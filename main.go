@@ -167,7 +167,12 @@ func main() {
 
 			if strings.HasPrefix(line, "## ") {
 				fmt.Println(line)
-				mainCategory = strings.TrimPrefix(line, "## ")
+				cleanedLine := strings.TrimPrefix(line, "## ")
+
+				if mainCategory != cleanedLine {
+					subCategory = ""
+					mainCategory = cleanedLine
+				}
 			}
 
 			if strings.HasPrefix(line, "### ") {
