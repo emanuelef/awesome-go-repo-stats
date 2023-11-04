@@ -143,7 +143,7 @@ const columns: GridColDef[] = [
     headerName: "Stars Timeline 30d",
     width: 120,
     renderCell: (params) => (
-      <Linkweb href={`/#/starstimeline/${params.row.repo}`}>link</Linkweb>
+      <Linkweb href={`./#/starstimeline/${params.row.repo}`}>link</Linkweb>
     ),
   },
 ];
