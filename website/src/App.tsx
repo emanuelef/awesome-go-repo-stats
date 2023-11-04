@@ -132,14 +132,23 @@ const columns: GridColDef[] = [
   {
     field: "archived",
     headerName: "Archived",
-    width: 110,
+    width: 100,
     renderCell: (params) => (
       <span style={{ color: params.value === "true" ? "red" : "inherit" }}>
         {params.value}
       </span>
     ),
   },
+  {
+    headerName: "Stars Timeline 30d",
+    width: 120,
+    renderCell: (params) => (
+      <Linkweb href={`/#/starstimeline/${params.row.repo}`}>link</Linkweb>
+    ),
+  },
 ];
+
+// https://emanuelef.github.io/awesome-go-repo-stats/#/starstimeline/mewkiz/flac
 
 // https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv
 
