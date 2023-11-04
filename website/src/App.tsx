@@ -178,6 +178,8 @@ function App() {
   const [selectedRepo, setSelectedRepo] = useState("kubernetes/kubernetes");
   const [collapsed, setCollapsed] = useState(true);
   const [lastUpdate, setLastUpdate] = useState("Unknown");
+  const [mainCategory, setMainCategory] = useState("All");
+  const [subCategory, setSubCategory] = useState("All");
 
   useEffect(() => {
     fetchReposData();
@@ -187,21 +189,76 @@ function App() {
   const Table = () => {
     return (
       <>
-        <DataGrid
-          getRowId={(row) => row.repo}
-          rows={dataRows}
-          columns={columns}
-          rowHeight={30}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 25 },
-            },
-            sorting: {
-              sortModel: [{ field: "stars-per-mille-30d", sort: "desc" }],
-            },
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "10px",
+            marginBottom: "10px",
           }}
-          pageSizeOptions={[5, 10]}
-        />
+        >
+          <Autocomplete
+            disablePortal
+            id="combo-box-main-category"
+            size="small"
+            options={[...new Set(dataRows.map((el) => el["main-category"]))]}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                style={{
+                  marginRight: "20px",
+                  marginLeft: "10px",
+                  width: "400px",
+                }}
+                label="Enter main category"
+                variant="outlined"
+                size="small"
+              />
+            )}
+            onChange={(e, v) => {
+              setMainCategory(v?.label);
+            }}
+          />
+          <Autocomplete
+            disablePortal
+            id="combo-box-sub-category"
+            size="small"
+            options={[...new Set(dataRows.map((el) => el["sub-category"]))]}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                style={{
+                  marginRight: "20px",
+                  marginLeft: "10px",
+                  width: "400px",
+                }}
+                label="Enter sub category"
+                variant="outlined"
+                size="small"
+              />
+            )}
+            onChange={(e, v) => {
+              setSubCategory(v?.label);
+            }}
+          />
+        </div>
+        <div style={{ marginLeft: "10px" }}>
+          <DataGrid
+            getRowId={(row) => row.repo}
+            rows={dataRows}
+            columns={columns}
+            rowHeight={30}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 25 },
+              },
+              sorting: {
+                sortModel: [{ field: "stars-per-mille-30d", sort: "desc" }],
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+          />
+        </div>
       </>
     );
   };
