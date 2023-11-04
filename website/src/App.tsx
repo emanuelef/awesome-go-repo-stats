@@ -180,11 +180,24 @@ function App() {
   const [lastUpdate, setLastUpdate] = useState("Unknown");
   const [mainCategory, setMainCategory] = useState("All");
   const [subCategory, setSubCategory] = useState("All");
+  const [subCategories, setSubCategories] = useState([]);
 
   useEffect(() => {
     fetchReposData();
     fetchLastUpdate();
   }, [selectedRepo]);
+
+  useEffect(() => {
+    console.log(mainCategory);
+    const subCategories = [
+      ...new Set(
+        dataRows
+          .filter((el) => el["main-category"] === mainCategory)
+          .map((el) => el["sub-category"])
+      ),
+    ];
+    setSubCategories(subCategories);
+  }, [mainCategory]);
 
   const Table = () => {
     return (
@@ -215,15 +228,18 @@ function App() {
                 size="small"
               />
             )}
+            value={mainCategory}
             onChange={(e, v) => {
-              setMainCategory(v?.label);
+              if (v) {
+                setMainCategory(v);
+              }
             }}
           />
           <Autocomplete
             disablePortal
             id="combo-box-sub-category"
             size="small"
-            options={[...new Set(dataRows.map((el) => el["sub-category"]))]}
+            options={subCategories}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -237,8 +253,11 @@ function App() {
                 size="small"
               />
             )}
+            value={subCategory}
             onChange={(e, v) => {
-              setSubCategory(v?.label);
+              if (v) {
+                setSubCategory(v);
+              }
             }}
           />
         </div>
@@ -289,6 +308,7 @@ function App() {
                 size="small"
               />
             )}
+            value={selectedRepo}
             onChange={(e, v) => {
               console.log(v?.label);
               setSelectedRepo(v?.label);
