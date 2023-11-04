@@ -9,6 +9,9 @@ on:
       - LICENSE
       - ".github/ISSUE_TEMPLATE/*.yml"
       - ".github/dependabot.yml"
+      - "website/**"
+      - "*.csv"
+      - "*.txt"
   pull_request:
     branches:
       - "*"
@@ -17,6 +20,9 @@ on:
       - LICENSE
       - ".github/ISSUE_TEMPLATE/*.yml"
       - ".github/dependabot.yml"
+      - "website/**"
+      - "*.csv"
+      - "*.txt"
 
 jobs:
   golangci-lint:
