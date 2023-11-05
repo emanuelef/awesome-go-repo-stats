@@ -23,6 +23,8 @@ import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded";
 import ViewModuleRoundedIcon from "@mui/icons-material/ViewModuleRounded";
 
+import GitHubButton from "react-github-btn";
+
 // Import the Header component
 import Header from "./Header";
 
@@ -393,6 +395,14 @@ function App() {
               });
             }}
           />
+          <GitHubButton
+            href={"https://github.com/" + selectedRepo}
+            data-size="large"
+            data-show-count="true"
+            aria-label="Star buttons/github-buttons on GitHub"
+          >
+            Star
+          </GitHubButton>
           <Linkweb
             style={{ marginLeft: "10px" }}
             href={fullStarsHistoryURL + selectedRepo}
