@@ -17,6 +17,7 @@ import (
 
 	"github.com/emanuelef/awesome-go-repo-stats/otel_instrumentation"
 	"github.com/emanuelef/github-repo-activity-stats/repostats"
+	"github.com/emanuelef/github-repo-activity-stats/stats"
 	"github.com/go-resty/resty/v2"
 	_ "github.com/joho/godotenv/autoload"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/httptrace/otelhttptrace"
@@ -82,7 +83,7 @@ func init() {
 func main() {
 	ctx := context.Background()
 
-	starsHistory := map[string][]repostats.StarsPerDay{}
+	starsHistory := map[string][]stats.StarsPerDay{}
 
 	tp, exp, err := otel_instrumentation.InitializeGlobalTracerProvider(ctx)
 	// Handle shutdown to ensure all sub processes are closed correctly and telemetry is exported
