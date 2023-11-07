@@ -70,8 +70,7 @@ const fullStarsHistoryURL =
   "https://emanuelef.github.io/gh-repo-stats-server/#/";
 
 function extractVersionNumber(value) {
-  // Assuming the "Min Go version" is in the format 'vX.YY'
-  const match = value.match(/\d+\.\d+/);
+  const match = value.match(/\d+(\.\d+)+(\.\d+)?/);
   return match ? match[0] : null;
 }
 
