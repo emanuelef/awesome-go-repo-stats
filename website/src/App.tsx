@@ -69,6 +69,25 @@ const lastUpdateURL =
 const fullStarsHistoryURL =
   "https://emanuelef.github.io/gh-repo-stats-server/#/";
 
+function extractVersionNumber(value) {
+  // Assuming the "Min Go version" is in the format 'vX.YY'
+  const match = value.match(/\d+\.\d+/);
+  return match ? match[0] : null;
+}
+
+function compareSemanticVersions(versionA, versionB) {
+  const semVerA = versionA.split(".").map((str) => parseInt(str.slice(1), 10));
+  const semVerB = versionB.split(".").map((str) => parseInt(str.slice(1), 10));
+
+  for (let i = 0; i < Math.min(semVerA.length, semVerB.length); i++) {
+    if (semVerA[i] !== semVerB[i]) {
+      return semVerA[i] - semVerB[i];
+    }
+  }
+
+  return semVerA.length - semVerB.length;
+}
+
 const columns: GridColDef[] = [
   {
     field: "repo",
@@ -133,6 +152,25 @@ const columns: GridColDef[] = [
     headerName: "Created days ago",
     width: 130,
     valueGetter: (params) => parseInt(params.value),
+  },
+  {
+    field: "min-go-version",
+    headerName: "Min Go version",
+    width: 80,
+    valueGetter: (params) => params.value,
+    sortComparator: (a, b) => {
+      // Extract the version numbers
+      const versionA = extractVersionNumber(a);
+      const versionB = extractVersionNumber(b);
+
+      // Use a custom comparison for semantic versions
+      if (versionA && versionB) {
+        return compareSemanticVersions(versionA, versionB);
+      }
+
+      // If the versions are not in the correct format, use a basic string comparison
+      return a.localeCompare(b);
+    },
   },
   {
     field: "archived",
