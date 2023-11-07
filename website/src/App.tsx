@@ -75,8 +75,8 @@ function extractVersionNumber(value) {
 }
 
 function compareSemanticVersions(versionA, versionB) {
-  const semVerA = versionA.split(".").map((str) => parseInt(str.slice(1), 10));
-  const semVerB = versionB.split(".").map((str) => parseInt(str.slice(1), 10));
+  const semVerA = versionA.split(".");
+  const semVerB = versionB.split(".");
 
   for (let i = 0; i < Math.min(semVerA.length, semVerB.length); i++) {
     if (semVerA[i] !== semVerB[i]) {
