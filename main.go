@@ -159,7 +159,7 @@ func main() {
 		scanner := bufio.NewScanner(reader)
 
 		// - [resty](https://github.com/go-resty/resty) - Simple HTTP and REST client for Go inspired by Ruby rest-client.
-		exp := regexp.MustCompile(`- \[(.+?)\]\(https:\/\/github.com\/(.+?)\) - .*`)
+		exp := regexp.MustCompile(`- \[([^\]]+)]\(https:\/\/github\.com\/([^\/\s]+\/[^\/\s]+)\) - .*`)
 
 		mainCategory := "General"
 		subCategory := ""
@@ -234,7 +234,7 @@ func main() {
 
 					// wait to avoid hitting 5k rate limit
 					if i%100 == 0 {
-						time.Sleep(3 * time.Minute)
+						time.Sleep(30 * time.Second)
 					}
 
 				}
