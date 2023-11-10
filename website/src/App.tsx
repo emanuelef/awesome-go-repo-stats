@@ -14,6 +14,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import TimeSeriesChart from "./TimeSeriesChart";
 import WaffleChart from "./WaffleChart";
 import DepsChart from "./DepsChart";
+import BubbleChart from "./BubbleChart";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import TableViewRounded from "@mui/icons-material/TableViewRounded";
@@ -22,6 +23,7 @@ import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded";
 import ViewModuleRoundedIcon from "@mui/icons-material/ViewModuleRounded";
+import BubbleChartRoundedIcon from '@mui/icons-material/BubbleChartRounded';
 
 import GitHubButton from "react-github-btn";
 
@@ -489,6 +491,12 @@ function App() {
             Waffle
           </MenuItem>
           <MenuItem
+            component={<Link to="/bubble" className="link" />}
+            icon={<BubbleChartRoundedIcon />}
+          >
+            Bubble
+          </MenuItem>
+          <MenuItem
             component={
               <Link to="/starstimeline/:user/:repository" className="link" />
             }
@@ -505,6 +513,7 @@ function App() {
           <Route path="/table" element={<Table />} />
           <Route path="/deps" element={<DepsChart />} />
           <Route path="/waffle" element={<WaffleChart dataRows={dataRows} />} />
+          <Route path="/bubble" element={<BubbleChart dataRows={dataRows} />} />
           <Route
             path="/starstimeline/:user/:repository"
             element={<StarsTimeline />}
