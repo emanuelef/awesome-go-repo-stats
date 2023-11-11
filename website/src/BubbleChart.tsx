@@ -1,56 +1,41 @@
 import React from "react";
-import FusionCharts from "fusioncharts";
-import Charts from "fusioncharts/fusioncharts.charts";
-import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-import ReactFC from "react-fusioncharts";
-
-// Adding the chart as dependency to the core fusioncharts
-ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
+import Plot from "react-plotly.js";
 
 const BubbleChart = ({ dataRows }) => {
-  const chartConfigs = {
-    type: "bubble",
-    width: "100%",
-    height: "400",
-    dataFormat: "json",
-    dataSource: {
-      chart: {
-        caption: "Bubble Chart Work in progress",
-        xaxisname: "X-Axis",
-        yaxisname: "Y-Axis",
-        plottooltext: "<b>$name</b> {br}X: $x{br}Y: $y{br}Value: $z",
-        showvalues: "1",
-      },
-      categories: [
-        {
-          category: dataRows.map((entry) => ({
-            label: entry["main-category"],
-          })),
-        },
-      ],
-      dataset: [
-        {
-          data: dataRows.map((entry) => ({
-            x: entry["new-stars-last-14d"],
-            y: entry["mentionable-users"],
-            z: entry["stars"],
-            name: entry["repo"],
-          })),
-        },
-      ],
+  console.log(dataRows);
+
+  const scatterPlot = {
+    x: dataRows.map((row) => row["new-stars-last-14d"]),
+    y: dataRows.map((row) => row["mentionable-users"]),
+    text: dataRows.map((row) => row.repo),
+    mode: "markers",
+    marker: {
+      size: dataRows.map((row) => row["stars"]),
+      sizemode: "diameter", // Set sizemode to 'diameter'
+      sizeref: 1100.1, // Adjust this value to control the maximum size
     },
+    type: "scatter",
+  };
+
+  const data = [scatterPlot];
+
+  const layout = {
+    xaxis: { type: "log", title: "New Stars Last 14 Days" },
+    yaxis: { type: "log", title: "Mentionable Users" },
+    size: "stars",
+    color: "main-category",
+    hovermode: "closest",
+    hover_name: "repo",
+    showlegend: true,
+    title: "Awesome Go Bubble Chart",
+    autosize: true,
+    height: 800,
+    width: 1200,
   };
 
   return (
-    <div
-      style={{
-        height: 960,
-        width: 1400,
-        marginTop: 10,
-        backgroundColor: "azure",
-      }}
-    >
-      <ReactFC {...chartConfigs} />;
+    <div className="App" style={{ width: "800px", height: "600px" }}>
+      <Plot data={data} layout={layout} />
     </div>
   );
 };
