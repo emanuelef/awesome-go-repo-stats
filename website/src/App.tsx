@@ -23,7 +23,7 @@ import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded";
 import ViewModuleRoundedIcon from "@mui/icons-material/ViewModuleRounded";
-import BubbleChartRoundedIcon from '@mui/icons-material/BubbleChartRounded';
+import BubbleChartRoundedIcon from "@mui/icons-material/BubbleChartRounded";
 
 import GitHubButton from "react-github-btn";
 
@@ -498,7 +498,10 @@ function App() {
           </MenuItem>
           <MenuItem
             component={
-              <Link to="/starstimeline/:user/:repository" className="link" />
+              <Link
+                to="/starstimeline/kubernetes/kubernetes"
+                className="link"
+              />
             }
             icon={<TimelineRoundedIcon />}
           >
