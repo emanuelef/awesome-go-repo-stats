@@ -2,6 +2,8 @@ import React from "react";
 import Linkweb from "@mui/material/Link";
 import GitHubButton from "react-github-btn";
 
+const awesomeGoUrl = "https://github.com/avelino/awesome-go";
+
 const csvURL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv";
 
@@ -17,16 +19,19 @@ function Header({ lastUpdate }) {
   };
 
   const githubButtonStyle = {
-    marginLeft: "auto", // Push GitHub button to the right
+    marginLeft: "auto",
     marginRight: "20px",
   };
 
   return (
     <div className="header" style={headerStyle}>
-      <p>Last Update: {lastUpdate}</p>
-      <Linkweb href={csvURL} download>
-        Link to CSV
+      <Linkweb href={awesomeGoUrl} target="_blank">
+        Awesome Go Stats
       </Linkweb>
+      <Linkweb href={csvURL} download>
+        CSV File
+      </Linkweb>
+      <p>Last Update: {lastUpdate}</p>
       <div style={githubButtonStyle}>
         <GitHubButton
           href="https://github.com/emanuelef/awesome-go-repo-stats"
@@ -35,7 +40,7 @@ function Header({ lastUpdate }) {
           data-show-count="true"
           aria-label="Star emanuelef/awesome-go-repo-stats on GitHub"
         >
-          Star
+          Star Me
         </GitHubButton>
       </div>
     </div>

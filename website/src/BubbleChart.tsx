@@ -41,7 +41,18 @@ const BubbleChart = ({ dataRows }) => {
     },
   };
 
-  return <ReactFC {...chartConfigs} />;
+  return (
+    <div
+      style={{
+        height: 960,
+        width: 1400,
+        marginTop: 10,
+        backgroundColor: "azure",
+      }}
+    >
+      <ReactFC {...chartConfigs} />;
+    </div>
+  );
 };
 
 export default BubbleChart;
