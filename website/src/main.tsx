@@ -12,6 +12,7 @@ root.render(
         <GitHubCorners
           position="right"
           href="https://github.com/emanuelef/awesome-go-repo-stats"
+          fixed={true}
         />
         <App />
       </HashRouter>

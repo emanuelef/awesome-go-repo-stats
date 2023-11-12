@@ -19,8 +19,8 @@ function Header({ lastUpdate }) {
   };
 
   const githubButtonStyle = {
-    marginLeft: "auto",
-    marginRight: "20px",
+    marginTop: "5px",
+    marginRight: "30px",
   };
 
   return (
