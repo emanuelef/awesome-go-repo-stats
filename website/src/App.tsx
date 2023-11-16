@@ -436,6 +436,7 @@ function App() {
           />
           <GitHubButton
             href={"https://github.com/" + selectedRepo}
+            data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark_high_contrast;"
             data-size="large"
             data-show-count="true"
             aria-label="Star buttons/github-buttons on GitHub"
@@ -458,7 +459,17 @@ function App() {
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       <Sidebar className="app" collapsed={collapsed}>
-        <Menu>
+        <Menu
+          menuItemStyles={{
+            button: ({ level, active, disabled }) => {
+              if (level >= 0)
+                return {
+                  color: disabled ? "#f5d9ff" : "#07100d",
+                  backgroundColor: active ? "#00cef9" : "undefined",
+                };
+            },
+          }}
+        >
           <MenuItem
             component={<Link to="/" className="link" />}
             className="menu1"
