@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import FusionCharts from "fusioncharts";
 import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import ReactFC from "react-fusioncharts";
+import CandyTheme from "fusioncharts/themes/fusioncharts.theme.candy";
 import schema from "./schema";
 
-ReactFC.fcRoot(FusionCharts, TimeSeries);
+ReactFC.fcRoot(FusionCharts, TimeSeries, CandyTheme);
 const chart_props = {
   timeseriesDs: {
     type: "timeseries",
-    width: "1200",
-    height: "800",
+    width: "100%",
+    height: "80%",
     dataEmptyMessage: "Fetching data...",
     dataSource: {
       caption: { text: "Daily Stars" },
@@ -107,7 +108,13 @@ function TimeSeriesChart({ repo }) {
   }, [repo]);
 
   return (
-    <div>
+    <div
+      style={{
+        marginLeft: "10px",
+        marginTop: "10px",
+        marginRight: "10px",
+      }}
+    >
       <ReactFC {...ds.timeseriesDs} />
     </div>
   );

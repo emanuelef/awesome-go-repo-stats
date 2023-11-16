@@ -15,7 +15,7 @@ function Header({ lastUpdate }) {
     color: "#fff",
     padding: "10px",
     gap: "10px",
-    height: "30px",
+    height: "40px",
   };
 
   const githubButtonStyle = {
