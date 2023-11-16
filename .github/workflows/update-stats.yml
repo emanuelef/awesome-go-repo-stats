@@ -37,7 +37,7 @@ jobs:
           echo "${current_day}" > "last-update.txt"
 
       - name: Push generated files to the repo
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
 
       - name: Upload results
         uses: actions/upload-artifact@v3
