@@ -133,7 +133,7 @@ const BubbleChart = ({ dataRows }) => {
         sizemode: "diameter",
         sizeref: 20.03,
         color: updatedData.map((row) =>
-          row["archived"] == "true" ? "red" : "orange"
+          row["archived"] == "true" ? "red" : "#00ADD8"
         ),
       },
       type: "scatter",
@@ -364,7 +364,7 @@ const BubbleChart = ({ dataRows }) => {
           }
           onChange={(e, v, reason) => {
             if (reason === "clear") {
-              setSelectedSize(axisMetrics[0]);
+              setSelectedSize(sizeMetrics[0]);
             } else {
               setSelectedSize(v);
             }
