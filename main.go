@@ -218,7 +218,7 @@ func main() {
 						fmt.Sprintf(mainCategory),
 						fmt.Sprintf(subCategory),
 						fmt.Sprintf(result.GoVersion),
-						fmt.Sprintf("%.3f", result.Liveness),
+						fmt.Sprintf("%.3f", result.LivenessScore),
 					})
 
 					if err != nil {

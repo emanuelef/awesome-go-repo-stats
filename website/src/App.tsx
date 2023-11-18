@@ -252,7 +252,7 @@ const columns: GridColDef[] = [
     headerName: "Liveness",
     width: 120,
     renderCell: (params) => {
-      const value = Math.floor(Math.random() * 101);
+      const value = params.value;
       const color = getColorFromValue(value);
 
       return (
