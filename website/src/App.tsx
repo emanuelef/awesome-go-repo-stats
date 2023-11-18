@@ -251,6 +251,7 @@ const columns: GridColDef[] = [
     field: "liveness",
     headerName: "Liveness",
     width: 120,
+    valueGetter: (params) => parseFloat(params.value),
     renderCell: (params) => {
       const value = params.value;
       const color = getColorFromValue(value);
