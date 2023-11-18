@@ -79,12 +79,12 @@ const lastUpdateURL =
 const fullStarsHistoryURL =
   "https://emanuelef.github.io/gh-repo-stats-server/#/";
 
-function extractVersionNumber(value) {
+const extractVersionNumber = (value) => {
   const match = value.match(/\d+(\.\d+)+(\.\d+)?/);
   return match ? match[0] : null;
-}
+};
 
-function compareSemanticVersions(versionA, versionB) {
+const compareSemanticVersions = (versionA, versionB) => {
   const semVerA = versionA.split(".");
   const semVerB = versionB.split(".");
 
@@ -95,7 +95,56 @@ function compareSemanticVersions(versionA, versionB) {
   }
 
   return semVerA.length - semVerB.length;
-}
+};
+
+const getColorFromValue = (value) => {
+  // Normalize the value to a scale from 0 to 1
+  const normalizedValue = value / 100;
+
+  // Define the colors for the gradient
+  const colors = [
+    { percent: 0, color: "#D9534F" }, // Adjusted Red
+    { percent: 0.5, color: "#FFA500" }, // Orange
+    { percent: 1, color: "#5CB85C" }, // Adjusted Green
+  ];
+
+  // Find the two colors to interpolate between
+  let startColor, endColor;
+  for (let i = 0; i < colors.length - 1; i++) {
+    if (
+      normalizedValue >= colors[i].percent &&
+      normalizedValue <= colors[i + 1].percent
+    ) {
+      startColor = colors[i];
+      endColor = colors[i + 1];
+      break;
+    }
+  }
+
+  // Interpolate between the two colors
+  const ratio =
+    (normalizedValue - startColor.percent) /
+    (endColor.percent - startColor.percent);
+  const rgbColor = interpolateColor(startColor.color, endColor.color, ratio);
+
+  return rgbColor;
+};
+
+const interpolateColor = (startColor, endColor, ratio) => {
+  const startRGB = hexToRgb(startColor);
+  const endRGB = hexToRgb(endColor);
+
+  const interpolatedRGB = startRGB.map((channel, index) =>
+    Math.round(channel + ratio * (endRGB[index] - channel))
+  );
+
+  return `rgb(${interpolatedRGB.join(", ")})`;
+};
+
+const hexToRgb = (hex) => {
+  const hexDigits = hex.slice(1).match(/.{1,2}/g);
+  return hexDigits.map((value) => parseInt(value, 16));
+};
 
 const columns: GridColDef[] = [
   {
@@ -197,6 +246,32 @@ const columns: GridColDef[] = [
     renderCell: (params) => (
       <Linkweb href={`./#/starstimeline/${params.row.repo}`}>link</Linkweb>
     ),
+  },
+  {
+    field: "liveness",
+    headerName: "Liveness",
+    width: 120,
+    renderCell: (params) => {
+      const value = Math.floor(Math.random() * 101);
+      const color = getColorFromValue(value);
+
+      return (
+        <div
+          style={{
+            backgroundColor: color,
+            width: "100%",
+            height: "80%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxSizing: "border-box",
+            border: "1px solid grey",
+          }}
+        >
+          {`${value}%`}
+        </div>
+      );
+    },
   },
 ];
 

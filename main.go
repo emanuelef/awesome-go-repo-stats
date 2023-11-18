@@ -123,6 +123,7 @@ func main() {
 		"archived", "dependencies",
 		"main-category", "sub-category",
 		"min-go-version",
+		"liveness",
 	}
 
 	err = csvWriter.Write(headerRow)
@@ -217,6 +218,7 @@ func main() {
 						fmt.Sprintf(mainCategory),
 						fmt.Sprintf(subCategory),
 						fmt.Sprintf(result.GoVersion),
+						fmt.Sprintf("%.3f", result.Liveness),
 					})
 
 					if err != nil {
