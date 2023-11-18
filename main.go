@@ -235,7 +235,7 @@ func main() {
 
 					// wait to avoid hitting 5k rate limit
 					if i%100 == 0 {
-						time.Sleep(30 * time.Second)
+						time.Sleep(40 * time.Second)
 					}
 
 				}
