@@ -286,8 +286,8 @@ const BubbleChart = ({ dataRows }) => {
         }}
       >
         <TextField
-          style={{ marginRight: "10px", marginLeft: "10px", width: "150px" }}
-          label="Days since last commit"
+          style={{ marginRight: "10px", marginLeft: "10px", width: "160px" }}
+          label="Max days since commit"
           variant="outlined"
           size="small"
           value={maxDaysLastCommit}
