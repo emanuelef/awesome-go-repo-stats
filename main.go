@@ -196,7 +196,13 @@ func main() {
 				result, err := client.GetAllStats(ctx, repo)
 				// if there is any error fetching any repo stop the update
 				if err != nil {
-					log.Fatal(err)
+					// retry once
+					fmt.Println("retrying after 2 minutes")
+					time.Sleep(2 * time.Minute)
+					result, err = client.GetAllStats(ctx, repo)
+					if err != nil {
+						log.Fatal(err)
+					}
 				}
 
 				if err == nil {
