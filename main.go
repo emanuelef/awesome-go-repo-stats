@@ -126,6 +126,7 @@ func main() {
 		"min-go-version",
 		"liveness",
 		"unique-contributors",
+		"new-commits-last-30d",
 	}
 
 	err = csvWriter.Write(headerRow)
@@ -194,9 +195,11 @@ func main() {
 
 				result, err := client.GetAllStats(ctx, repo)
 				// if there is any error fetching any repo stop the update
-				if err != nil {
-					log.Fatal(err)
-				}
+				/*
+					if err != nil {
+						log.Fatal(err)
+					}
+				*/
 
 				if err == nil {
 					daysSinceLastStar := int(currentTime.Sub(result.LastStarDate).Hours() / 24)
@@ -222,6 +225,7 @@ func main() {
 						fmt.Sprintf(result.GoVersion),
 						fmt.Sprintf("%.3f", result.LivenessScore),
 						fmt.Sprintf("%d", result.DifferentAuthors),
+						fmt.Sprintf("%d", result.CommitsHistory.AddedLast30d),
 					})
 
 					if err != nil {
