@@ -194,9 +194,9 @@ func main() {
 
 				result, err := client.GetAllStats(ctx, repo)
 				// if there is any error fetching any repo stop the update
-					if err != nil {
-						log.Fatal(err)
-					}
+				if err != nil {
+					log.Fatal(err)
+				}
 
 				if err == nil {
 					daysSinceLastStar := int(currentTime.Sub(result.LastStarDate).Hours() / 24)
@@ -235,6 +235,7 @@ func main() {
 					}
 
 					starsHistory[repo] = result.StarsTimeline
+					commitsHistory[repo] = result.CommitsTimeline
 
 					// wait to avoid hitting 5k rate limit
 					if i%100 == 0 {
