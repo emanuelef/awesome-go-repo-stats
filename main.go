@@ -84,6 +84,7 @@ func main() {
 	ctx := context.Background()
 
 	starsHistory := map[string][]stats.StarsPerDay{}
+	commitsHistory := map[string][]stats.CommitsPerDay{}
 
 	tp, exp, err := otel_instrumentation.InitializeGlobalTracerProvider(ctx)
 	// Handle shutdown to ensure all sub processes are closed correctly and telemetry is exported
@@ -124,6 +125,7 @@ func main() {
 		"main-category", "sub-category",
 		"min-go-version",
 		"liveness",
+		"unique-contributors",
 	}
 
 	err = csvWriter.Write(headerRow)
@@ -192,9 +194,9 @@ func main() {
 
 				result, err := client.GetAllStats(ctx, repo)
 				// if there is any error fetching any repo stop the update
-				if err != nil {
-					log.Fatal(err)
-				}
+					if err != nil {
+						log.Fatal(err)
+					}
 
 				if err == nil {
 					daysSinceLastStar := int(currentTime.Sub(result.LastStarDate).Hours() / 24)
@@ -203,11 +205,11 @@ func main() {
 					err = csvWriter.Write([]string{
 						repo,
 						fmt.Sprintf("%d", result.Stars),
-						fmt.Sprintf("%d", result.AddedLast30d),
-						fmt.Sprintf("%d", result.AddedLast14d),
-						fmt.Sprintf("%d", result.AddedLast7d),
-						fmt.Sprintf("%d", result.AddedLast24H),
-						fmt.Sprintf("%.3f", result.AddedPerMille30d),
+						fmt.Sprintf("%d", result.StarsHistory.AddedLast30d),
+						fmt.Sprintf("%d", result.StarsHistory.AddedLast14d),
+						fmt.Sprintf("%d", result.StarsHistory.AddedLast7d),
+						fmt.Sprintf("%d", result.StarsHistory.AddedLast24H),
+						fmt.Sprintf("%.3f", result.StarsHistory.AddedPerMille30d),
 						fmt.Sprintf("%d", daysSinceLastStar),
 						fmt.Sprintf("%d", daysSinceLastCommit),
 						fmt.Sprintf("%d", daysSinceCreation),
@@ -219,6 +221,7 @@ func main() {
 						fmt.Sprintf(subCategory),
 						fmt.Sprintf(result.GoVersion),
 						fmt.Sprintf("%.3f", result.LivenessScore),
+						fmt.Sprintf("%d", result.DifferentAuthors),
 					})
 
 					if err != nil {
@@ -235,7 +238,7 @@ func main() {
 
 					// wait to avoid hitting 5k rate limit
 					if i%100 == 0 {
-						time.Sleep(40 * time.Second)
+						time.Sleep(30 * time.Second)
 					}
 
 				}
@@ -244,8 +247,12 @@ func main() {
 		}
 
 		writeGoDepsMapFile(depsUse)
+
 		jsonData, _ := json.MarshalIndent(starsHistory, "", " ")
 		_ = os.WriteFile("stars-history-30d.json", jsonData, 0o644)
+
+		commitsJsonData, _ := json.MarshalIndent(commitsHistory, "", " ")
+		_ = os.WriteFile("commits-history-30d.json", commitsJsonData, 0o644)
 	}
 
 	elapsed := time.Since(currentTime)

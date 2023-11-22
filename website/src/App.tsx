@@ -204,6 +204,12 @@ const columns: GridColDef[] = [
     valueGetter: (val) => parseFloat(val.row["stars-per-mille-30d"]),
   },
   {
+    field: "unique-contributors",
+    headerName: "Commits Authors 30d",
+    width: 100,
+    valueGetter: (params) => parseInt(params.value),
+  },
+  {
     field: "mentionable-users",
     headerName: "Ment. users",
     width: 110,
