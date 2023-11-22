@@ -197,8 +197,8 @@ func main() {
 				// if there is any error fetching any repo stop the update
 				if err != nil {
 					// retry once
-					fmt.Println("retrying after 2 minutes")
-					time.Sleep(2 * time.Minute)
+					fmt.Println("retrying after 5 minutes")
+					time.Sleep(5 * time.Minute)
 					result, err = client.GetAllStats(ctx, repo)
 					if err != nil {
 						log.Fatal(err)
