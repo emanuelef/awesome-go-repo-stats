@@ -127,7 +127,7 @@ const BubbleChart = ({ dataRows }) => {
   const [selectedSize, setSelectedSize] = useState(sizeMetrics[0]);
 
   const [selectedBubbleColour, setSelectedBubbleColour] = useState(
-    bubbleColour[0]
+    bubbleColour[1]
   );
 
   const handleInputChange = (event, setStateFunction) => {
@@ -462,7 +462,7 @@ const BubbleChart = ({ dataRows }) => {
           }
           onChange={(e, v, reason) => {
             if (reason === "clear") {
-              setSelectedBubbleColour(bubbleColour[0]);
+              setSelectedBubbleColour(bubbleColour[1]);
             } else {
               setSelectedBubbleColour(v);
             }
