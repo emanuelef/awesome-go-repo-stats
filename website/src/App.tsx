@@ -557,9 +557,7 @@ function App() {
             data-size="large"
             data-show-count="true"
             aria-label="Star buttons/github-buttons on GitHub"
-          >
-            Star
-          </GitHubButton>
+          />
           <Linkweb
             style={{ marginLeft: "10px" }}
             href={fullStarsHistoryURL + selectedRepo}
