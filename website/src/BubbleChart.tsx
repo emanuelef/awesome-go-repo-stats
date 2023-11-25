@@ -39,6 +39,7 @@ const sizeMetrics = [
   { label: "Total Stars", metric: "stars" },
   { label: "Same", metric: "same" },
   { label: "Commits Last 30 Days", metric: "new-commits-last-30d" },
+  { label: "Unique authors Last 30 Days", metric: "unique-contributors" },
 ];
 
 const formatStars = (stars) => {
@@ -167,6 +168,34 @@ const BubbleChart = ({ dataRows }) => {
     }
   };
 
+  const getSize = (data) => {
+    switch (selectedSize.metric) {
+      case "stars":
+        return data.map((row) => Math.sqrt(row[selectedSize.metric]) * 7);
+      case "same":
+        return data.map((row) => 600);
+      case "liveness":
+        return data.map((row) => row[selectedSize.metric] * 10);
+      case "new-commits-last-30d":
+        return data.map((row) => Math.sqrt(row[selectedSize.metric]) * 7);
+      case "unique-contributors":
+        return data.map((row) => Math.sqrt(row[selectedSize.metric]) * 12);
+      default:
+        return data.map((row) => 600);
+    }
+  };
+
+  const getSizeRef = (metric) => {
+    switch (metric) {
+      case "new-commits-last-30d":
+        return 2.0;
+      case "unique-contributors":
+        return 1.7;
+      default:
+        return 20.03;
+    }
+  };
+
   const buildChartData = (dataRows) => {
     let updatedData = [];
 
@@ -192,17 +221,15 @@ const BubbleChart = ({ dataRows }) => {
             row["days-last-commit"]
           } days ago<br>Age: ${calculateAge(
             row["days-since-creation"]
-          )} <br>Commits last 30d: ${row["new-commits-last-30d"]} `
+          )} <br>Commits last 30d: ${
+            row["new-commits-last-30d"]
+          } <br>Unique authors last 30d: ${row["unique-contributors"]}`
       ),
       mode: "markers",
       marker: {
-        size:
-          selectedSize.metric == "stars" ||
-          selectedSize.metric == "new-commits-last-30d"
-            ? updatedData.map((row) => Math.sqrt(row[selectedSize.metric]) * 7)
-            : updatedData.map((row) => 600),
+        size: getSize(updatedData),
         sizemode: "diameter",
-        sizeref: selectedSize.metric == "new-commits-last-30d" ? 2.0 : 20.03,
+        sizeref: getSizeRef(selectedSize.metric),
         color:
           selectedBubbleColour.metric === "same"
             ? updatedData.map((row) =>
