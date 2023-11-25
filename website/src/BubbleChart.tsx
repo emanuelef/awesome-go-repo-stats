@@ -38,6 +38,7 @@ const axisMetrics = [
 const sizeMetrics = [
   { label: "Total Stars", metric: "stars" },
   { label: "Same", metric: "same" },
+  { label: "Commits Last 30 Days", metric: "new-commits-last-30d" },
 ];
 
 const formatStars = (stars) => {
@@ -189,16 +190,19 @@ const BubbleChart = ({ dataRows }) => {
             row.stars
           )}<br>Last commit: ${
             row["days-last-commit"]
-          } days ago<br>Age: ${calculateAge(row["days-since-creation"])}`
+          } days ago<br>Age: ${calculateAge(
+            row["days-since-creation"]
+          )} <br>Commits last 30d: ${row["new-commits-last-30d"]} `
       ),
       mode: "markers",
       marker: {
         size:
-          selectedSize.metric == "stars"
-            ? updatedData.map((row) => Math.sqrt(row["stars"]) * 7)
+          selectedSize.metric == "stars" ||
+          selectedSize.metric == "new-commits-last-30d"
+            ? updatedData.map((row) => Math.sqrt(row[selectedSize.metric]) * 7)
             : updatedData.map((row) => 600),
         sizemode: "diameter",
-        sizeref: 20.03,
+        sizeref: selectedSize.metric == "new-commits-last-30d" ? 2.0 : 20.03,
         color:
           selectedBubbleColour.metric === "same"
             ? updatedData.map((row) =>
