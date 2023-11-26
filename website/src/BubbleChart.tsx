@@ -38,6 +38,7 @@ const axisMetrics = [
 const sizeMetrics = [
   { label: "Total Stars", metric: "stars" },
   { label: "Same", metric: "same" },
+  { label: "Stars Last 30 Days", metric: "new-stars-last-30d" },
   { label: "Commits Last 30 Days", metric: "new-commits-last-30d" },
   { label: "Unique authors Last 30 Days", metric: "unique-contributors" },
 ];
@@ -180,6 +181,8 @@ const BubbleChart = ({ dataRows }) => {
         return data.map((row) => Math.sqrt(row[selectedSize.metric]) * 7);
       case "unique-contributors":
         return data.map((row) => Math.sqrt(row[selectedSize.metric]) * 12);
+      case "new-stars-last-30d":
+        return data.map((row) => Math.sqrt(row[selectedSize.metric]) * 9);
       default:
         return data.map((row) => 600);
     }
@@ -191,6 +194,8 @@ const BubbleChart = ({ dataRows }) => {
         return 2.0;
       case "unique-contributors":
         return 1.7;
+      case "new-stars-last-30d":
+        return 3.2;
       default:
         return 20.03;
     }
@@ -223,7 +228,9 @@ const BubbleChart = ({ dataRows }) => {
             row["days-since-creation"]
           )} <br>Commits last 30d: ${
             row["new-commits-last-30d"]
-          } <br>Unique authors last 30d: ${row["unique-contributors"]}`
+          } <br>Unique authors last 30d: ${
+            row["unique-contributors"]
+          } <br>New stars last 30d: ${row["new-stars-last-30d"]}`
       ),
       mode: "markers",
       marker: {
