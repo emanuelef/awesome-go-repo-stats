@@ -201,9 +201,9 @@ func main() {
 					time.Sleep(5 * time.Minute)
 					result, err = client.GetAllStats(ctx, repo)
 					/*
-					if err != nil {
-						log.Fatal(err)
-					}
+						if err != nil {
+							log.Fatal(err)
+						}
 					*/
 				}
 
