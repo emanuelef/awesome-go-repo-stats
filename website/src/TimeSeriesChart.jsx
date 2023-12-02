@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import FusionCharts from "fusioncharts";
 import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import ReactFC from "react-fusioncharts";
 import CandyTheme from "fusioncharts/themes/fusioncharts.theme.candy";
-import schema from "./schema";
+import schemaStars from "./schema_stars";
+import schemaCommits from "./schema_commits";
 
 ReactFC.fcRoot(FusionCharts, TimeSeries, CandyTheme);
 const chart_props = {
@@ -13,17 +14,8 @@ const chart_props = {
     height: "80%",
     dataEmptyMessage: "Fetching data...",
     dataSource: {
-      caption: { text: "Daily Stars" },
+      caption: { text: "" },
       data: null,
-      yAxis: [
-        {
-          plot: [
-            {
-              value: "New Stars",
-            },
-          ],
-        },
-      ],
       chart: {
         animation: "0",
         theme: "candy",
@@ -35,63 +27,56 @@ const chart_props = {
   },
 };
 
-const API_URL =
-  "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/stars-history-30d.json";
+const API_BASE_URL =
+  "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main";
+const API_STARS_URL = `${API_BASE_URL}/stars-history-30d.json`;
+const API_COMMITS_URL = `${API_BASE_URL}/commits-history-30d.json`;
 
-const CSVToArray = (data, delimiter = ",", omitFirstRow = true) =>
-  data
-    .slice(omitFirstRow ? data.indexOf("\n") + 1 : 0)
-    .split("\n")
-    .map((v) => {
-      let arr = v.split(delimiter);
-      arr[1] = parseInt(arr[1]);
-      arr[2] = parseInt(arr[2]);
-      return arr;
-    });
-
-const movingAvg = (array, countBefore, countAfter = 0) => {
-  const result = [];
-  for (let i = 0; i < array.length; i++) {
-    const subArr = array.slice(
-      Math.max(i - countBefore, 0),
-      Math.min(i + countAfter + 1, array.length)
-    );
-    const avg =
-      subArr.reduce((a, b) => a + (isNaN(b) ? 0 : b), 0) / subArr.length;
-    result.push(avg);
-  }
-  return result;
-};
-
-function TimeSeriesChart({ repo }) {
+function TimeSeriesChart({ repo, metric }) {
   const [ds, setds] = useState(chart_props);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const dataRef = useRef([]);
+
   const loadData = async () => {
     try {
-      console.log("loadData " + repo);
+      if (dataRef.current.length === 0) {
+        console.log("load all data " + metric);
 
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      const dataRepo = data[repo];
+        const response = await fetch(
+          metric == "Stars" ? API_STARS_URL : API_COMMITS_URL
+        );
+        const data = await response.json();
 
-      let calcMovingAvg = dataRepo.map((el) => {
-        return el[1];
-      });
-      calcMovingAvg = movingAvg(calcMovingAvg, 3, 3);
+        console.log(data);
 
-      const movingAverageData = dataRepo.map((el, index) => {
-        el[1] = calcMovingAvg[index];
-        return el;
-      });
+        dataRef.current = data;
+        setDataLoaded(true);
+        renderData();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-      console.log(movingAverageData);
+  const renderData = () => {
+    try {
+      console.log(dataRef.current);
 
+      if (dataRef.current.length === 0) {
+        console.log("Rendering but no data");
+        throw new Error("No data");
+      }
+
+      const dataRepo = dataRef.current[repo];
       const fusionTable = new FusionCharts.DataStore().createDataTable(
-        movingAverageData,
-        schema
+        dataRepo,
+        metric == "Stars" ? schemaStars : schemaCommits
       );
       const options = { ...ds };
       options.timeseriesDs.dataSource.data = fusionTable;
-      options.timeseriesDs.dataSource.caption = { text: `Daily Stars ${repo}` };
+      options.timeseriesDs.dataSource.caption = {
+        text: `${repo}`,
+      };
       options.timeseriesDs.dataSource.chart.exportFileName = `${repo.replace(
         "/",
         "_"
@@ -103,9 +88,15 @@ function TimeSeriesChart({ repo }) {
   };
 
   useEffect(() => {
-    console.log("render");
     loadData();
+  }, []);
+
+  /*
+  useEffect(() => {
+    console.log("render");
+    renderData();
   }, [repo]);
+  */
 
   return (
     <div
@@ -115,7 +106,7 @@ function TimeSeriesChart({ repo }) {
         marginRight: "10px",
       }}
     >
-      <ReactFC {...ds.timeseriesDs} />
+      {dataLoaded && <ReactFC {...ds.timeseriesDs} />}
     </div>
   );
 }
