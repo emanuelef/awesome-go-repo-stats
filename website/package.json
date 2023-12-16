@@ -15,10 +15,10 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.0",
     "@mui/material": "^5.15.0",
-    "@mui/x-data-grid": "^6.18.4",
+    "@mui/x-data-grid": "^6.18.5",
     "@nivo/bar": "^0.84.0",
     "@nivo/waffle": "^0.84.0",
-    "@types/plotly.js": "^2.12.30",
+    "@types/plotly.js": "^2.12.31",
     "@uiw/react-github-corners": "^1.5.16",
     "fusioncharts": "^3.21.1",
     "papaparse": "^5.4.1",
@@ -31,18 +31,18 @@
     "react-github-btn": "^1.4.0",
     "react-plotly.js": "^2.6.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
-    "react-router-dom": "^6.20.1"
+    "react-router-dom": "^6.21.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.17",
+    "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8"
+    "vite": "^5.0.10"
   }
 }
