@@ -34,10 +34,10 @@
     "react-router-dom": "^6.21.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.47",
+    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.18.1",
+    "@typescript-eslint/parser": "^6.19.0",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
