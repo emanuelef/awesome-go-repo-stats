@@ -77,7 +77,7 @@ const lastUpdateURL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/last-update.txt";
 
 const fullStarsHistoryURL =
-  "https://emanuelef.github.io/gh-repo-stats-server/#/";
+  "https://emanuelef.github.io/daily-stars-explorer/#/";
 
 const TimelineMetrics = ["Stars", "Commits"];
 

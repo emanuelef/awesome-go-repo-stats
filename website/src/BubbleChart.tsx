@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Papa from "papaparse";
 
 const fullStarsHistoryURL =
-  "https://emanuelef.github.io/gh-repo-stats-server/#";
+  "https://emanuelef.github.io/daily-stars-explorer/#";
 
 const csvURL =
   "https://raw.githubusercontent.com/emanuelef/awesome-go-repo-stats/main/analysis-latest.csv";
