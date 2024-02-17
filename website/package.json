@@ -13,36 +13,36 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.9",
-    "@mui/material": "^5.15.9",
-    "@mui/x-data-grid": "^6.19.3",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@mui/x-data-grid": "^6.19.4",
     "@nivo/bar": "^0.84.0",
     "@nivo/waffle": "^0.84.0",
-    "@types/plotly.js": "^2.29.0",
+    "@types/plotly.js": "^2.29.1",
     "@uiw/react-github-corners": "^1.5.16",
     "fusioncharts": "^3.21.1",
     "papaparse": "^5.4.1",
-    "plotly.js": "^2.29.0",
-    "plotly.js-dist": "^2.29.0",
-    "plotly.js-dist-min": "^2.29.0",
+    "plotly.js": "^2.29.1",
+    "plotly.js-dist": "^2.29.1",
+    "plotly.js-dist-min": "^2.29.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fusioncharts": "^4.0.0",
     "react-github-btn": "^1.4.0",
     "react-plotly.js": "^2.6.0",
     "react-pro-sidebar": "^1.1.0",
-    "react-router-dom": "^6.22.0"
+    "react-router-dom": "^6.22.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.55",
+    "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "typescript": "^5.3.3",
-    "vite": "^5.1.1"
+    "vite": "^5.1.3"
   }
 }
