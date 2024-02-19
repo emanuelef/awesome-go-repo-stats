@@ -3,7 +3,7 @@ module github.com/emanuelef/awesome-go-repo-stats
 go 1.21.4
 
 require (
-	github.com/emanuelef/github-repo-activity-stats v0.2.9
+	github.com/emanuelef/github-repo-activity-stats v0.2.12
 	github.com/go-resty/resty/v2 v2.11.0
 	github.com/joho/godotenv v1.5.1
 	go.opentelemetry.io/contrib/instrumentation/net/http/httptrace/otelhttptrace v0.48.0
