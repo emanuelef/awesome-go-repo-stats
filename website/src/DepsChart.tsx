@@ -24,7 +24,7 @@ const columns: GridColDef[] = [
     field: "awesome_go_repos_using_dep",
     headerName: "Repos #",
     width: 100,
-    valueGetter: (params) => parseInt(params.value),
+    valueGetter: (val) => parseInt(val),
   },
 ];
 
