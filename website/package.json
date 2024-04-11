@@ -22,9 +22,9 @@
     "@uiw/react-github-corners": "^1.5.16",
     "fusioncharts": "^3.23.0",
     "papaparse": "^5.4.1",
-    "plotly.js": "^2.30.1",
-    "plotly.js-dist": "^2.30.1",
-    "plotly.js-dist-min": "^2.30.1",
+    "plotly.js": "^2.31.0",
+    "plotly.js-dist": "^2.31.0",
+    "plotly.js-dist-min": "^2.31.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fusioncharts": "^4.0.0",
@@ -34,15 +34,15 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@types/react": "^18.2.74",
-    "@types/react-dom": "^18.2.24",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
+    "@types/react": "^18.2.76",
+    "@types/react-dom": "^18.2.25",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "typescript": "^5.4.4",
+    "typescript": "^5.4.5",
     "vite": "^5.2.8"
   }
 }
