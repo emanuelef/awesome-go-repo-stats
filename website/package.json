@@ -13,12 +13,12 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.15",
-    "@mui/material": "^5.15.15",
-    "@mui/x-data-grid": "^7.3.1",
+    "@mui/icons-material": "^5.15.16",
+    "@mui/material": "^5.15.16",
+    "@mui/x-data-grid": "^7.3.2",
     "@nivo/bar": "^0.86.0",
     "@nivo/waffle": "^0.86.0",
-    "@types/plotly.js": "^2.29.2",
+    "@types/plotly.js": "^2.29.3",
     "@uiw/react-github-corners": "^1.5.16",
     "fusioncharts": "^3.23.0",
     "papaparse": "^5.4.1",
@@ -42,6 +42,6 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.6",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10"
+    "vite": "^5.2.11"
   }
 }
