@@ -16,7 +16,7 @@
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.17",
     "@mui/x-data-grid": "^7.4.0",
-    "@nivo/bar": "^0.86.0",
+    "@nivo/bar": "^0.87.0",
     "@nivo/waffle": "^0.86.0",
     "@types/plotly.js": "^2.29.4",
     "@uiw/react-github-corners": "^1.5.16",
