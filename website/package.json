@@ -13,15 +13,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-<<<<<<< HEAD
-    "@mui/icons-material": "^5.15.18",
-    "@mui/material": "^5.15.18",
-    "@mui/x-data-grid": "^7.5.1",
-=======
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "@mui/x-data-grid": "^7.7.0",
->>>>>>> 8d03447 (update deps)
     "@nivo/bar": "^0.87.0",
     "@nivo/waffle": "^0.87.0",
     "@types/plotly.js": "^2.29.5",
