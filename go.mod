@@ -3,7 +3,7 @@ module github.com/emanuelef/awesome-go-repo-stats
 go 1.21.4
 
 require (
-	github.com/emanuelef/github-repo-activity-stats v0.2.30
+	github.com/emanuelef/github-repo-activity-stats v0.2.31
 	github.com/go-resty/resty/v2 v2.13.1
 	github.com/joho/godotenv v1.5.1
 	go.opentelemetry.io/contrib/instrumentation/net/http/httptrace/otelhttptrace v0.53.0
@@ -33,8 +33,8 @@ require (
 	golang.org/x/sync v0.7.0 // indirect
 	golang.org/x/sys v0.22.0 // indirect
 	golang.org/x/text v0.16.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20240711142825-46eb208f015d // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240711142825-46eb208f015d // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20240723171418-e6d459c13d2a // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240723171418-e6d459c13d2a // indirect
 	google.golang.org/grpc v1.65.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 )
