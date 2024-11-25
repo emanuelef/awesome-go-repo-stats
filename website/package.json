@@ -31,7 +31,7 @@
     "react-github-btn": "^1.4.0",
     "react-plotly.js": "^2.6.0",
     "react-pro-sidebar": "^1.1.0",
-    "react-router-dom": "^6.25.1"
+    "react-router-dom": "^7.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
