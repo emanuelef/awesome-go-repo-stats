@@ -13,7 +13,7 @@ require (
 	go.opentelemetry.io/otel v1.32.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.29.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.28.0
-	go.opentelemetry.io/otel/sdk v1.29.0
+	go.opentelemetry.io/otel/sdk v1.32.0
 	go.opentelemetry.io/otel/trace v1.32.0
 	golang.org/x/oauth2 v0.24.0
 )
