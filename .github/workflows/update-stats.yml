@@ -36,8 +36,16 @@ jobs:
           current_day=$(date +"%Y-%m-%d")
           echo "${current_day}" > "last-update.txt"
 
-      - name: Push generated files to the repo
+      - name: Configure Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Push generated csv files to the repo
         uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update stats"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
 
       - name: Upload results
         uses: actions/upload-artifact@v4
