@@ -639,7 +639,7 @@ function App() {
         <section style={{ width: "100%" }}>
           <Header lastUpdate={lastUpdate} />
           <Routes>
-            <Route path="/" element={<Table />} />
+            <Route path="/" element={<BubbleChart dataRows={dataRows} />} />
             <Route path="/table" element={<Table />} />
             <Route path="/deps" element={<DepsChart />} />
             <Route
