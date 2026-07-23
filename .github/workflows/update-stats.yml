@@ -1,8 +1,6 @@
 name: Update Awesome Go stats
 
 on:
-  schedule:
-    - cron: "0 3 * * *" # runs at 03:00 UTC everyday
   workflow_dispatch:
 
 jobs:
